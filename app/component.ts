@@ -18,33 +18,30 @@ export class ProductComponent {
     getProductByPosition(position: number): Product {
         return this.model.getProducts()[position];
     }
-    getClassesByPosition(position: number): string {
-        let product = this.getProductByPosition(position);
-        return "p-a-1 " + (product.price < 50 ? "bg-info" : "bg-warning");
+
+    getProduct(key: number): Product {
+        return this.model.getProduct(key);
     }
 
-    // getClasses(key: number): string {
-    //     let product = this.model.getProduct(key);
-    //     return "p-a-1 " + (product.price < 50 ? "bg-info" : "bg-warning");
-    // }
+    getProducts(): Product[] {
+        return this.model.getProducts();
+    }
 
-    // getClassMap(key:number): Object {
-    //     let product = this.model.getProduct(key);
-    //     return {
-    //         "text-xs-center bg-danger" : product.name == "Kayak",
-    //         "bg-info" : product.price < 50
-    //     };
-    // }
+    getProductCount() {
+        return this.getProducts().length;
+    }
 
-    // fontSizeWithUnits: string = "30px";
-    // fontSizeWithoutUnits: string = "30";
+    getKey(index: number, product: Product) {
+        return product.id;
+    }
 
-    // getStyles(key: number){
-    //     let product = this.model.getProduct(key);
-    //     return {
-    //         fontSize: "30px",
-    //         "margin.px" : 100,
-    //         color: product.price > 50 ? "red" : "green"
-    //     };
-    // }
+    get nextProduct(): Product {
+        return this.model.getProducts().shift();
+    }
+    getProductPrice(index: number): number {
+        return Math.floor(this.getProduct(index).price);
+    }
+
+    targetName: string = "Kayak";
+
 }

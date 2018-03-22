@@ -1,4 +1,5 @@
 "use strict";
+var product_model_1 = require("./product.model");
 var datasource_model_1 = require("./datasource.model");
 var Model = (function () {
     function Model() {
@@ -8,6 +9,10 @@ var Model = (function () {
         this.products = new Array();
         this.dataSource.getData().forEach(function (p) { return _this.products.push(p); });
     }
+    Model.prototype.swarpProduct = function () {
+        var p = this.products.shift();
+        this.products.push(new product_model_1.Product(p.id, p.name, p.category, p.price));
+    };
     Model.prototype.getProducts = function () {
         return this.products;
     };
