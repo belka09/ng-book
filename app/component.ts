@@ -6,18 +6,8 @@ import { Product } from "./product.model"
     templateUrl: "app/template.html"
 })
 export class ProductComponent {
+    selectedProduct: string;
     model: Model = new Model();
-
-    constructor(
-        ref: ApplicationRef
-    ) {
-        (<any>window).appRef = ref;
-        (<any>window).model = this.model;
-    }
-
-    getProductByPosition(position: number): Product {
-        return this.model.getProducts()[position];
-    }
 
     getProduct(key: number): Product {
         return this.model.getProduct(key);
@@ -27,21 +17,8 @@ export class ProductComponent {
         return this.model.getProducts();
     }
 
-    getProductCount() {
-        return this.getProducts().length;
+    getSelected(product: Product): boolean {
+        return product.name == this.selectedProduct;
     }
-
-    getKey(index: number, product: Product) {
-        return product.id;
-    }
-
-    get nextProduct(): Product {
-        return this.model.getProducts().shift();
-    }
-    getProductPrice(index: number): number {
-        return Math.floor(this.getProduct(index).price);
-    }
-
-    targetName: string = "Kayak";
-
 }
+

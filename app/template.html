@@ -34,7 +34,10 @@
         </td>
     </tr>
 </table>
-
+-->
+<div class="bg-info p-a-1">
+    Selected product: {{selectedProduct || '(None)'}}
+</div>
 <table class="table table-sm table-bordered m-t-1">
     <tr>
         <th></th>
@@ -42,19 +45,23 @@
         <th>Category</th>
         <th>Price</th>
     </tr>
-    <tr *ngFor="let index of getProducts(); let i = index; let odd = odd" [class.bg-primary]="odd" [class.bg-info]="!odd">
-        <td>{{i + 1}}</td>
+    <tr *ngFor="let item of getProducts(); let i = index" [class.bg-info]="getSelected(item)">
+        <td (click)="selectedProduct=item.name">{{i + 1}}</td>
         <td>
-            {{index.name}}
+            {{item.name}}
         </td>
         <td>
-            {{index.category}}
+            {{item.category}}
         </td>
         <td>
-            {{index.price}}
+            {{item.price}}
         </td>
     </tr>
-</table> -->
+</table>
+<div class="form-group">
+    <label>Product Name</label>
+    <input type="text" class="form-control" (input)="selectedProduct=$event.target.value" />
+</div>
 
 <!-- <template #titleTemplate>
     <h4 class="p-a-1 bg-success">Repeated Content</h4>
@@ -69,7 +76,7 @@
 <template [ngTemplateOutlet]="titleTemplate"></template> -->
 
 
-<template #titleTemplate let-text="title">
+<!-- <template #titleTemplate let-text="title">
     <h4 class="p-a-1 bg-success">
         {{text}}
     </h4>
@@ -87,4 +94,4 @@
 
 <div class='bg-info p-a-1'>
     The rounded price is {{getProductPrice(1)}}
-</div>
+</div> -->
