@@ -27,7 +27,7 @@ export class ProductComponent {
     }
 
     addProduct(p: Product) {
-        console.log("New product: " + this.jsonProduct);
+        this.model.saveProduct(p);
     }
 
     submitForm(form: NgForm) {
