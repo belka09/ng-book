@@ -10,44 +10,46 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var repository_model_1 = require("./repository.model");
+var product_model_1 = require("./product.model");
+var form_model_1 = require("./form.model");
 var ProductComponent = (function () {
-    function ProductComponent(ref) {
+    function ProductComponent() {
         this.model = new repository_model_1.Model();
-        this.targetName = "Kayak";
-        window.appRef = ref;
-        window.model = this.model;
+        this.form = new form_model_1.ProductFormGroup();
+        this.newProduct = new product_model_1.Product();
+        this.formSubmitted = false;
     }
-    ProductComponent.prototype.getProductByPosition = function (position) {
-        return this.model.getProducts()[position];
-    };
     ProductComponent.prototype.getProduct = function (key) {
         return this.model.getProduct(key);
     };
     ProductComponent.prototype.getProducts = function () {
         return this.model.getProducts();
     };
-    ProductComponent.prototype.getProductCount = function () {
-        return this.getProducts().length;
-    };
-    ProductComponent.prototype.getKey = function (index, product) {
-        return product.id;
-    };
-    Object.defineProperty(ProductComponent.prototype, "nextProduct", {
+    Object.defineProperty(ProductComponent.prototype, "jsonProduct", {
         get: function () {
-            return this.model.getProducts().shift();
+            return JSON.stringify(this.newProduct);
         },
         enumerable: true,
         configurable: true
     });
-    ProductComponent.prototype.getProductPrice = function (index) {
-        return Math.floor(this.getProduct(index).price);
+    ProductComponent.prototype.addProduct = function (p) {
+        console.log("New product: " + this.jsonProduct);
+    };
+    ProductComponent.prototype.submitForm = function (form) {
+        this.formSubmitted = true;
+        if (form.valid) {
+            this.addProduct(this.newProduct);
+            this.newProduct = new product_model_1.Product();
+            form.reset();
+            this.formSubmitted = false;
+        }
     };
     ProductComponent = __decorate([
         core_1.Component({
             selector: "app",
             templateUrl: "app/template.html"
         }), 
-        __metadata('design:paramtypes', [core_1.ApplicationRef])
+        __metadata('design:paramtypes', [])
     ], ProductComponent);
     return ProductComponent;
 }());
