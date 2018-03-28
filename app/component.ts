@@ -12,6 +12,7 @@ export class ProductComponent {
     form: ProductFormGroup = new ProductFormGroup();
     newProduct: Product = new Product();
     formSubmitted: boolean = false;
+    showTable: boolean = true;
 
 
     getProduct(key: number): Product {
