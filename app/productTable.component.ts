@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, ViewChildren, QueryList } from "@angular/core";
 import { Model } from "./repository.model";
 import { Product } from "./product.model";
 @Component({
@@ -17,5 +17,4 @@ export class ProductTableComponent {
     deleteProduct(key: number) {
         this.dataModel.deleteProduct(key);
     }
-    showTable: boolean = true; k
 }
