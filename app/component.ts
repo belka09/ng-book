@@ -1,43 +1,15 @@
 import { ApplicationRef, Component } from "@angular/core";
 import { Model } from "./repository.model";
 import { Product } from "./product.model";
-import { NgForm } from "@angular/forms";
 import { ProductFormGroup } from "./form.model";
 @Component({
     selector: "app",
-    templateUrl: "app/template.html"
+    templateUrl: "app/template.html",
+    styles: ["/deep/ div { border: 2px black solid; font-style:italic }"]
 })
 export class ProductComponent {
     model: Model = new Model();
-    form: ProductFormGroup = new ProductFormGroup();
-    newProduct: Product = new Product();
-    formSubmitted: boolean = false;
-    showTable: boolean = true;
-
-
-    getProduct(key: number): Product {
-        return this.model.getProduct(key);
-    }
-
-    getProducts(): Product[] {
-        return this.model.getProducts();
-    }
-
-    get jsonProduct() {
-        return JSON.stringify(this.newProduct);
-    }
-
     addProduct(p: Product) {
         this.model.saveProduct(p);
-    }
-
-    submitForm(form: NgForm) {
-        this.formSubmitted = true;
-        if (form.valid) {
-            this.addProduct(this.newProduct);
-            this.newProduct = new Product();
-            form.reset();
-            this.formSubmitted = false;
-        }
     }
 }
