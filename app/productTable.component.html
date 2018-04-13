@@ -4,6 +4,7 @@
         <th>Name</th>
         <th>Category</th>
         <th>Price</th>
+        <th>Discount</th>
         <th></th>
     </tr>
     <tr *ngFor="let item of getProducts(); let i = index;
@@ -12,7 +13,10 @@
         <td style="vertical-align:middle">{{item.name}}</td>
         <td style="vertical-align:middle">{{item.category}}</td>
         <td style="vertical-align:middle">
-            {{item.price | currency:"USD":true }}
+            {{item.price | discount | currency:"USD":true }}
+        </td>
+        <td style="vertical-align:middle" [pa-price]="item.price" #discount="discount">
+            {{ discount.discountAmount | currency:"USD": true }}
         </td>
         <td class="text-xs-center">
             <button class="btn btn-danger btn-sm" (click)="deleteProduct(item.id)">
@@ -22,5 +26,5 @@
     </tr>
 </table>
 
-<paDiscountEditor [discounter]="discounter"></paDiscountEditor>
-<paDiscountDisplay [discounter]="discounter"></paDiscountDisplay>
+<paDiscountEditor></paDiscountEditor>
+<paDiscountDisplay></paDiscountDisplay>
